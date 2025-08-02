@@ -27,12 +27,25 @@ const ShortenerPage = () => {
       return newUrl;
     });
 
-    setUrls((prev) => [...prev, ...shortened]);
+    setUrls((prev) => {
+  const merged = [...prev, ...shortened];
+  const unique = merged.filter(
+    (item, index, self) =>
+      index === self.findIndex((i) => i.shortcode === item.shortcode)
+  );
+  return unique;
+});
+
   };
 
   useEffect(() => {
   localStorage.setItem('shortenedUrls', JSON.stringify(urls));
 }, [urls]);
+
+useEffect(() => {
+  const stored = JSON.parse(localStorage.getItem('shortenedUrls') || '[]');
+  setUrls(stored);
+}, []);
 
   return (
     <Container>

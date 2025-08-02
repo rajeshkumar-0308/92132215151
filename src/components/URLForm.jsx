@@ -3,13 +3,17 @@ import { TextField, Button, Box, Typography } from '@mui/material';
 import { isValidURL, isValidShortcode, isValidMinutes } from '../utils/validators';
 
 const URLForm = ({ onSubmit }) => {
-  const [inputs, setInputs] = useState(Array(5).fill({ url: '', validity: '', shortcode: '' }));
+  const [inputs, setInputs] = useState([{ url: '', validity: '', shortcode: '' }]);
   const [error, setError] = useState('');
 
   const handleChange = (index, field, value) => {
-    const newInputs = [...inputs];
-    newInputs[index][field] = value;
-    setInputs(newInputs);
+    const updated = [...inputs];
+    updated[index][field] = value;
+    setInputs(updated);
+  };
+
+  const addField = () => {
+    setInputs([...inputs, { url: '', validity: '', shortcode: '' }]);
   };
 
   const handleSubmit = () => {
@@ -54,7 +58,10 @@ const URLForm = ({ onSubmit }) => {
         </Box>
       ))}
       {error && <Typography color="error">{error}</Typography>}
-      <Button variant="contained" onClick={handleSubmit}>Shorten URLs</Button>
+      <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+        <Button variant="outlined" onClick={addField}>Add More</Button>
+        <Button variant="contained" onClick={handleSubmit}>Shorten URLs</Button>
+      </Box>
     </Box>
   );
 };

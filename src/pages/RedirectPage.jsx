@@ -6,7 +6,6 @@ const RedirectPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulated fetch from session/localStorage
     const data = JSON.parse(localStorage.getItem('shortenedUrls') || '[]');
     const matched = data.find((u) => u.shortcode === shortcode);
     if (matched && new Date(matched.expiry) > new Date()) {

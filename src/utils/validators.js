@@ -1,4 +1,4 @@
-// src/utils/validators.js
+
 export const isValidURL = (url) => {
   try {
     new URL(url);
@@ -9,7 +9,7 @@ export const isValidURL = (url) => {
 };
 
 export const isValidShortcode = (code) => {
-  return /^[a-zA-Z0-9]{4,12}$/.test(code); // Adjust length as needed
+  return /^[a-zA-Z0-9]{4,12}$/.test(code); 
 };
 
 export const isValidMinutes = (val) => {
